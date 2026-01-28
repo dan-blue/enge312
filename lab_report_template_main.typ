@@ -64,7 +64,7 @@
   }
   show heading.where(level: 2): it => {
     set text(size: 11pt, weight: "bold")
-    set block(above: 1.2em, below: 0.8em)
+    set block(above: 1.2em, below: 2em)
     it
   }
   
