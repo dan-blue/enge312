@@ -30,7 +30,7 @@
   
   // Set text formatting - 12pt Times New Roman equivalent
   set text(
-    font: "Liberation Serif",  // Closest to Times New Roman in Typst
+    font: "Times New Roman",  // Closest to Times New Roman in Typst
     size: 12pt,
     lang: "en"
   )
@@ -74,12 +74,16 @@
   // Configure figures
   set figure(
     gap: 1em,
+    supplement: [Fig.],
   )
   
   show figure.caption: it => {
     set text(size: 10pt)
+    set par(justify: true)
     set align(left)
-    block(width: 100%, it)
+    par()[
+      \ #strong[#it.supplement #it.counter.display(it.numbering).] #it.body
+    ]
   }
   
   // Configure tables
@@ -150,7 +154,7 @@
 
 // Helper function for references to figures
 #let figref(label) = {
-  [Fig. #ref(label)]
+  [Fig.~#ref(label, supplement: none)]
 }
 
 // Helper function for references to equations
