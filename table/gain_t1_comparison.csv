@@ -1,4 +1,4 @@
 Parameter,Theoretical,Measured,Percent Difference
 Input Voltage (Vp-p),0.080 V,0.0792 V,1.00%
 Output Voltage (Vp-p),1.47 V,1.44 V,2.04%
-Voltage Gain (Av),18.4,18.18,1.20%
+Voltage Gain (Av),184,181.8,1.20%

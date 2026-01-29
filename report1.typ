@@ -144,8 +144,8 @@ Laboratory analysis included comparing theoretical and experimental Q values, ga
 #centered_table("6", "Measured midband voltage gain and output characteristics comparison between transistors",
   table(
     columns: 3,
-    table.header([*Metric*], [*Transistor 1*], [*Transistor 2*], [*% Diff*]),
-    ..csv("table/gain_comparison.csv").flatten().slice(4)
+    table.header([*Metric*], [*Transistor 1*], [*Transistor 2*]),
+    ..csv("table/gain_comparison.csv").flatten().slice(3)
   )
 )
 

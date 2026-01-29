@@ -1,6 +1,2 @@
 Parameter,Transistor 1 (Beta 168),Transistor 2 (Beta 58.7)
-Max Positive Swing (V_o max),12.2 V,7.4 V
-Max Negative Swing (V_o min),-1.6 V,N/A
-Max Undistorted P-P (V_p-p),1.44 V,7.4 V
-Input Voltage (V_in),0.0792 V,0.44 V
 Midband Voltage Gain (Av),18.18,16.81
