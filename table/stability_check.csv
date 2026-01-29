@@ -1,0 +1,5 @@
+Condition,Required Ratio,Actual Ratio,Result
+V_BB / V_BE (T1),> 10,6.09,Not Met (Partial)
+V_BB / V_BE (T2),> 10,5.79,Not Met (Partial)
+R_E / [R_B / (B1+1)],> 10,46.7,Met
+R_E / [R_B / (B2+1)],> 10,16.5,Met

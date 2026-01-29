@@ -1,0 +1,8 @@
+Value,Theoretical,Measured,Percent Difference
+Beta (hFE),58.7,58.7,0.0%
+V_BE,0.7 V,0.673 V,4.0%
+V_BQ,4.08 V,3.9 V,4.41%
+V_EQ,3.38 V,3.31 V,2.07%
+V_CQ,13.41 V,11.6 V,13.5%
+I_CQ,1.69 mA,1.01 mA,34.0%
+V_CEQ,9.62 V,13.8 V,43.45%

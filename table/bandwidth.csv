@@ -1,5 +1,5 @@
-Unnamed: 0,Unnamed: 1,Unnamed: 2
-f_upper,2.4,MHz
-f_lower,150.0,Hz
-f_mid,19.0,kHz
-bandwidth,2.4,Mhz
+Parameter,Value
+Lower Cutoff Frequency (f_lower),150 Hz
+Upper Cutoff Frequency (f_upper),2.4 MHz
+Calculated Midband Frequency (f_mid),18.97 kHz
+Measured Bandwidth,2.399 MHz

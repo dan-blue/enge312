@@ -1,8 +1,8 @@
-Unnamed: 0,Theoretical,Measured,Percent Difference
-beta,,168.0,
-V_BE,0.7,0.67,0.0438
-V_BQ,4.01,4.0,0.00249687890137323
-V_EQ,3.31,3.33,0.006024096385542173
-V_CQ,14.16,11.7,0.19025522041763349
-I_CQ,1.5,1.9,0.23529411764705876
-V_CEQ,9.3,8.75,0.0609
+Value,Theoretical,Measured,Percent Difference
+Beta (hFE),168.0,168.0,0.0%
+V_BE,0.7 V,0.67 V,4.38%
+V_BQ,4.08 V,4.0 V,1.96%
+V_EQ,3.38 V,3.33 V,1.48%
+V_CQ,13.1 V,11.7 V,10.69%
+I_CQ,1.77 mA,1.9 mA,7.06%
+V_CEQ,9.15 V,8.37 V,8.56%
