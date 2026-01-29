@@ -80,7 +80,10 @@ Laboratory analysis included comparing theoretical and experimental Q values, ga
 \ \
 
 = RESULTS
-#let results = csv("q_tab.csv")
+#table_caption[
+  *Table 2.* 
+]
+#let results = csv("table/first_transistor.csv")
 #let format_cell(cell) = {
   if cell.starts-with("$") and cell.ends-with("$") {
     math.equation(cell.slice(1, -1))
@@ -94,6 +97,39 @@ Laboratory analysis included comparing theoretical and experimental Q values, ga
   ..results.flatten().map(format_cell),
 )
 
+#table_caption[
+  *Table 3.* 
+]
+#let results = csv("table/beta_v_beta.csv")
+#let format_cell(cell) = {
+  if cell.starts-with("$") and cell.ends-with("$") {
+    math.equation(cell.slice(1, -1))
+  } else {
+    cell
+  }
+}
+#table(
+  align: left,
+  columns: 4,
+  ..results.flatten().map(format_cell),
+)
+
+#table_caption[
+  *Table 3.* 
+]
+#let results = csv("table/beta_v_beta.csv")
+#let format_cell(cell) = {
+  if cell.starts-with("$") and cell.ends-with("$") {
+    math.equation(cell.slice(1, -1))
+  } else {
+    cell
+  }
+}
+#table(
+  align: left,
+  columns: 4,
+  ..results.flatten().map(format_cell),
+)
 == Sample Calculations
 (if needed)
 
