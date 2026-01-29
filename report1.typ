@@ -20,7 +20,15 @@ The gain of the amplifier was measured and compared between $beta$ values. Max V
 
 = THEORETICAL BACKGROUND
 Consider the circuit shown in #figref(<fig-ce-amp-circuit>). It is a bjt amplifer in the common-emitter configuration. It consists of a NPN Bipolar Junction Transistor (BJT), some resistors, a power source, and some DC filtering capacitors. A BJT has three operating regions. They are the active, saturation, and cutoff regions. In order to amplify an input signal with minimal distortion, the most linear region must be used. Crossing into a nonlinear region adds distortion to the output signal. The linear region for a BJT is the active region.
-The voltage
+
+How does a BJT in a common-emitter configuration amplify?
+
+Why is biasing required, and how is the Q-point established?
+
+How do the node voltages and currents relate to operating region and linearity?
+
+
+
 
 #figure(
   norm_bjt_amp(),
@@ -38,7 +46,23 @@ $ V_("CEQ") = V_("CC") - (R_("CC") +  R_E / alpha) I_("CQ") $ <eq-VEQ>
 = METHODS AND MATERIALS
 
 == Equipment
-Your equipment table...
+
+#table_caption[
+  *Table 1.* Bench laboratory equipment used in this procedure.
+]
+#align(center)[
+  #table(
+    align: center,
+    columns: 3,
+    [*Manufacturer*], [*Serial Number*], [*Function*],
+    [Tektronix ], [CPS250], [Power Supply],
+    [Tektronix ],[TDS2024C], [Oscilliscope],
+    [Fluke], [45], [Digital Multimeter],
+    [VOLTEQ], [SFG-1010], [Functon Generator]
+  ) 
+]<tab-equipment>
+
+\ \
 
 == Experimental Procedure
 The circuit in #figref(<fig-ce-amp-circuit>) was constructed as shown, save for the $R_E$ resistor, which was changed to $2k Omega$ due to insufficent resistor values in the lab. $V_i$ was connected to connected to the function generator. $V_("CC")$ was connected to the benchtop power supply. 
@@ -56,6 +80,19 @@ Laboratory analysis included comparing theoretical and experimental Q values, ga
 \ \
 
 = RESULTS
+#let results = csv("q_tab.csv")
+#let format_cell(cell) = {
+  if cell.starts-with("$") and cell.ends-with("$") {
+    math.equation(cell.slice(1, -1))
+  } else {
+    cell
+  }
+}
+#table(
+  align: left,
+  columns: 4,
+  ..results.flatten().map(format_cell),
+)
 
 == Sample Calculations
 (if needed)

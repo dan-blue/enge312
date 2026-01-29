@@ -1,0 +1,8 @@
+Voltage	Theoretical Value,Experimental Value,Percent Difference
+Base-Emitter Voltage ($V_(“BE”)$),0.7,0.67,4.38
+Base Voltage ($V_(“BQ”)$),,4,200.00
+Emitter Voltage ($V_(“EQ”)$),,3.33,200.00
+Collector Voltage ($V_(“CQ”)$),,11.7,200.00
+Collector Current ($I_(“CQ”)$),,1.9,200.00
+Collector-Emittter Voltage ($V_("CEQ")$),9.3,8.75,6.09
+

@@ -1,0 +1,8 @@
+Parameter,Theoretical Value,Experimental Value,Percent Difference
+$V_("BE")$,0.7,0.67,4.38
+$V_("BQ")$,,4,200.00
+$V_("EQ")$,,3.33,200.00
+$V_("CQ")$,,11.7,200.00
+$I_("CQ")$,,1.9,200.00
+$V_("CEQ")$,9.3,8.75,6.09
+

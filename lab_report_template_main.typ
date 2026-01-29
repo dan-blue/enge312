@@ -87,7 +87,7 @@
   }
   
   // Configure tables
-  show figure.where(kind: table): set figure(placement: auto)
+  show figure.where(kind: table): set figure(placement: none)
   
   // --- TITLE PAGE ---
   // Experiment number (if provided)
@@ -142,7 +142,7 @@
 
 // Helper function for creating properly formatted table captions
 #let table_caption(it) = {
-  set text(size: 10pt, weight: "bold")
+  set text(size: 10pt)
   it
 }
 
