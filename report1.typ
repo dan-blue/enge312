@@ -77,7 +77,7 @@ Bandwidth measurements were taken by using the function generator to scan throug
 
 Laboratory analysis included comparing theoretical and experimental Q values, gain results, as well as differences between the two transistors used based on their differing $beta$ values. Bias stability conditons were also checked.
 
-\ \
+\ \ 
 
 = RESULTS
 #table_caption[
