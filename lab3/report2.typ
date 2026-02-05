@@ -1,4 +1,5 @@
 #import "../lab_report_template_main.typ": *
+
 #show: lab_report.with(
   experiment_number: 3,     // Optional: Your experiment number
   title: "Active Loading",
@@ -7,84 +8,156 @@
   institution: "George Fox University",
   location: "Newberg, OR",
   date: "Feb 05, 2026",  // or use none for automatic date
-  show_copyright: true      // Set false for student reports
+  show_copyright: false      // Set false for student reports
 )
+// 1. Move table captions to the top
+#show figure.where(kind: table): set figure.caption(position: top)
 
-= Results: Sample Calculations
+// 2. Align the caption text to the left
+#show figure.caption: set align(left)
 
-== 1. Resistor Biased "CE" Amplifier
-Given:
-- $V_("CC") = 15 "V"$
-- $R_1 = 47 "k" Omega$, $R_2 = 33 "k" Omega$
-- $R_C = 2.2 "k" Omega$, $R_E = 1.8 "k" Omega$, $R_L = 2.2 "k" Omega$
-- Transistor $Q_1$ (2N3904): Assume $beta approx 130$, $V_("BE") approx 0.7 "V"$
+// 3. Force the figure container to take full page width
+// (This ensures the caption sits at the page margin, not the table edge)
+#show figure: set block(width: 100%)
+#figure(
+  image("/assets/image.png"),
+  caption: [CE amplifier without active loading.]
+) <basic_amp_diagram>
+#figure(
+  image("/assets/image-1.png"),
+  caption: [Current Mirror]
+)
+#figure(
+  image("/assets/image-2.png"),
+  caption: [CE Amplifier with active loading from the current mirror]
+)<amp-current-mirror>
 
-*Thevenin Equivalent Base Circuit:*
-$ R_B = R_1 || R_2 = (47 "k" dot 33 "k") / (47 "k" + 33 "k") approx 19.39 "k" Omega $
-$ V_("BB") = V_("CC") dot (R_2) / (R_1 + R_2) = 15 "V" dot (33) / (80) = 6.19 "V" $
+= Results
+// Table 1: DC Operating Points (Q-Points)
+#figure(
+  table(
+    columns: (auto, auto, auto, auto, auto, auto, auto, auto, auto, auto),
+    inset: 4pt,
+    align: left,
+    //fill: (col, row) => if row == 0 { luma(230) } else { none },
+    
+    // Header
+    table.header(
+      [], 
+      table.cell(colspan: 3)[*(Resistor)*], 
+      table.cell(colspan: 3)[*(Current Mirror)*], 
+      table.cell(colspan: 3)[*(Active Load)*]
+    ),
+    
+    // Sub-header
+    [*Param*], [*Meas*], [*Theo*], [*% Diff*], 
+    [*Meas*], [*Theo*], [*% Diff*], 
+    [*Meas*], [*Theo*], [*% Diff*],
 
-*Q-Point Analysis:*
-$ I_("CQ") &= (V_("BB") - V_("BE")) / (R_E + R_B/beta) \
-         &= (6.19 "V" - 0.7 "V") / (1.8 "k" Omega + (19.39 "k" Omega)/130) \
-         &= (5.49 "V") / (1.8 "k" Omega + 0.15 "k" Omega) \
-         &= 2.81 "mA" $
+    // Row 1: Current
+    [$I_C$ / $I_O$], [2.80 mA], [2.81 mA], [0.13%],
+    [2.80 mA], [2.81 mA], [0.13%],
+    [2.88 mA], [2.81 mA], [0.62%],
 
-$ V_("CE") &= V_("CC") - I_("CQ")(R_C + R_E) \
-         &= 15 "V" - 2.81 "mA"(2.2 "k" Omega + 1.8 "k" Omega) \
-         &= 15 "V" - 11.24 "V" \
-         &= 3.76 "V" $
+    // Row 2: Voltage
+    [$V_"CE"$ / $V_O$], [3.78 V], [3.76 V], [0.13%],
+    [14.30 V], [10.92 V], [6.70%],
+    [4.63 V], [3.76 V], [5.18%],
+  ),
+  caption: [DC Operating Point Comparison across all circuits.]
+) <dc_table>
 
-*AC Gain ($A_V$):*
-$ V_T approx 26 "mV" $
-$ g_m = I_("CQ") / V_T = (2.81 "mA") / (26 "mV") approx 0.108 "S" $
-$ R_("ac") = R_C || R_L = (2.2 "k" dot 2.2 "k") / (2.2 "k" + 2.2 "k") = 1.1 "k" Omega $
-$ A_V &= -g_m (R_("ac")) \
-      &= -(0.108 "S")(1100 Omega) \
-      &= -118.8 $
 
-*Output Swing:*
-$ V_(o, "max") &= V_("CE") - V_("CE", "sat") approx 3.76 "V" - 0.2 "V" = 3.56 "V" $
-$ V_(o, "min") &= I_("CQ")(R_C || R_L) = (2.81 "mA")(1.1 "k" Omega) = 3.09 "V" $
-$ V_(o, "p-p") &= 2 dot min(V_(o, "max"), V_(o, "min")) \
-              &= 2 dot 3.09 "V" = 6.18 "V" $
+// Table 2: Amplifier Gain Comparison (Loaded vs Active)
+#figure(
+  table(
+    columns: (auto, auto, auto, auto),
+    inset: 8pt,
+    align: center,
+    //fill: (col, row) => if row == 0 { luma(230) } else { none },
 
-== 2. Current Mirror (Active Load Setup)
-Given:
-- Target $I_o approx I_("CQ") approx 2.81 "mA"$ (matching the "CE" stage)
-- $V_("CC") = 15 "V"$
-- $Q_2, Q_3$ (2N3906): Assume $beta approx 150$, $V_("BE") approx 0.7 "V"$
+    // Header
+    table.header(
+      [*Configuration*], 
+      [*Measured $A_v$*], 
+      [*Theoretical $A_v$*], 
+      [*% Difference*]
+    ),
 
-*Reference Current Setting:*
-To match $I_o$ to $I_("CQ")$, we calculate the required $R_("ref")$:
-$ R_("ref") &= (V_("CC") - V_("BE")) / I_("ref") \
-           &approx (15 "V" - 0.7 "V") / (2.81 "mA") \
-           &= 14.3 "V" / 2.81 "mA" \
-           &= 5.09 "k" Omega $
-_(Note: In lab, use a potentiometer or series resistors to approximate $5.1 "k" Omega$)_
+    // Data
+    [Resistor Bias], [-107 V/V], [-122 V/V], [-3.28%],
+    [Active Load], [-244 V/V], [-204 V/V], [-4.46%],
+  ),
+  caption: [Voltage Gain Comparison]
+) <gain_table>
 
-*Output Current:*
-$ I_o = I_("ref") / (1 + 2/beta) = (2.81 "mA") / (1 + 2/150) approx 2.77 "mA" $
 
-== 3. "CE" Amplifier with Active Load (Current Source Biasing)
-Given:
-- Load $R_L = 2.2 "k" Omega$
-- Bias $I_C approx 2.8 "mA"$
-- Assume Early Voltage resistance $r_o = 30 "k" Omega$ for all transistors[cite: 49].
+// Table 3: Output Swing Analysis (Maximum & Minimum)
+#figure(
+  table(
+    columns: (auto, auto, auto, auto),
+    inset: 8pt,
+    align: center,
+    //fill: (col, row) => if row == 0 { luma(230) } else { none },
 
-*Voltage Gain with Active Load:*
-The "ac"tive load repl"ac"es $R_C$ with the output resistance of the current mirror ($r_o$ of PNP).
-$ R_("eff") &= r_(o, "NPN") || r_(o, "PNP") || R_L \
-          &= 30 "k" Omega || 30 "k" Omega || 2.2 "k" Omega \
-          &= 15 "k" Omega || 2.2 "k" Omega \
-          &= (15 "k" dot 2.2 "k") / (15 "k" + 2.2 "k") approx 1.92 "k" Omega $
+    // Header
+    table.header(
+      [*Parameter*], 
+      [*Measured (V)*], 
+      [*Theoretical (V)*], 
+      [*% Difference*]
+    ),
 
-$ A_V &= -g_m (R_("eff")) \
-      &= -(0.108 "S")(1920 Omega) \
-      &= -207.4 $
-
-_(Note: The gain increases significantly compared to the resistor biased version ($119$ vs $207$) due to the higher "eff"ective AC impedance at the collector, even though $R_L$ dominates in this loaded case.)_
+    // Data
+    [$v_(o,max)$], [2.56 V], [3.56 V], [8.17%],
+    [$v_(o,min)$], [3.72 V], [3.09 V], [4.62%],
+    [$v_(o,p-p)$], [6.28 V], [6.18 V], [0.39%],
+  ),
+  caption: [Output Voltage Swing Analysis (Clipping Limits).]
+) <swing_table>
+#figure(
+  image("Figure_1.png"),
+  caption: [Graph of AC Load Lines of the two amplifiers used in the experiment. The dotted line is the current mirrored active load amplifier with no load resistor.]
+) <ac_load_line_graph>
 
 
 = Discussion
+The percent differences between lab measurements and hand calculations seemed to be fairly small; for most, the difference is 5%, with a couple of outliers like $V_("o,max")$ and $V_O$. This is probably due to some human error. Of course, for some of the calculations, lab measurements had to be used, since for the current meter, the ideal is that it would match the measured current in the lab when looking at the analysis. The current meter seemed to shift the Q point of the amplifier a little bit when added, at least experimentally, since it shouldn't change the Q point, or increase the gain. The change to a current mirror at the emitter did bring a very similar calculated gain increase. The load resistor decreases the amount of gain possible..
 
-= Appendix
+#pagebreak()
+= Sample Calculations
+$ I_("CQ") &= (V_("BB") - V_("BE")) / ( (R_E/alpha) + (R_B/beta)) \ 
+           &= (8.13V - 0.7V) / (((1.8k Omega) / alpha) + ((19k Omega) / 130) \
+   I_("CQ")&= 2.8 "mA" $ \
+
+$ V_("CE")&= V_("CC") - (R_("CC") + R_E / alpha)I_("CQ") \
+          &=  15V - (2.2k Omega + (1.8k omega) / 0.99)(2.8 "mA") \
+  V_("CE")&= 3.76V $ \
+
+$ A_V &= -(beta V_T) / I_("CQ")(R_o || R_c || R_L) \
+      &= -(130 * 25 "mV") / (2.8 "mA")(30k Omega || 30k Omega || 2.2k Omega) \
+      A_V &= -122 V/V
+$ \
+
+
+$ V_("o,max") &= V_("CE") - v_("CE,sat") \ 
+  &= 3.76V - 0.2 V \
+  &= 3.56V $ \
+
+$ V_("o,min") &= (R_C || R_L)I_("CQ") \
+    &= (2.2k Omega || 2.2k Omega) * 2.8 "mA" \
+    &= 3.09V $ \
+
+
+$ I_("ref") &= (V_("CC") - V_("BE")) / (I_("REF")) \
+&= (15-0.7V)/(2.8 "mA") \
+&= 5.1k Omega  $
+$ I_o &= I_("ref")  /  (1 + 2/beta) \
+      &= (5.1k Omega) / (1 + 2/150) \
+      &= 2.80 "mA"
+$ \
+
+
+$ V_("o") &= I_o * R_X \
+&= 2.8 "mA" * 3.9k Omega \
+&= 10.92V $ \
