@@ -20,15 +20,15 @@
 // (This ensures the caption sits at the page margin, not the table edge)
 #show figure: set block(width: 100%)
 #figure(
-  image("/assets/image.png"),
+  image("../assets/image.png"),
   caption: [CE amplifier without active loading.]
 ) <basic_amp_diagram>
 #figure(
-  image("/assets/image-1.png"),
+  image("../assets/image-1.png"),
   caption: [Current Mirror]
 )
 #figure(
-  image("/assets/image-2.png"),
+  image("../assets/image-2.png"),
   caption: [CE Amplifier with active loading from the current mirror]
 )<amp-current-mirror>
 
